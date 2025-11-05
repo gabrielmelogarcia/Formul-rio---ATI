@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário - ATIMA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" id="logo-link">
+                <img src="ati_logo.svg" alt="logoati" id="logo-img">
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        
+        <p>Preencha os campos com as suas informações.</p>
+
+        <form action="javascript:void(0)" method="POST" id="inscricao-form" autocomplete="on">
+            
+            <div>
+                <label for="nome">Nome Completo *</label>
+                <input type="text" id="nome" name="nome_completo" required placeholder="Digite o seu nome">
+            </div>
+
+            <div>
+                <label for="cpf">CPF *</label>
+                <input type="text" id="cpf" name="cpf_usuario" placeholder="Digite o seu CPF (ex: 000.000.000.00)" required>
+            </div>
+
+            <div>
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email_usuario" required placeholder="email.ati@exemplo.com">
+            </div>
+
+            <div>
+                <label for="telefone">Telefone *</label>
+                <input type="tel" id="telefone" name="telefone_usuario" placeholder="(xx) xxxxx-xxxx" required>
+            </div>
+
+            <div>
+                <label for="cep">CEP *</label>
+                <input type="text" id="cep" name="cep_usuario" placeholder="xxxxx-xxx" required>
+            </div>
+            
+            <div>
+                <label for="data_nasc">Data de Nascimento *</label>
+                <input type="date" id="data_nasc" name="data_nascimento">
+            </div>
+
+            <div>
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="5" placeholder="Digite aqui sobre a ATI - MA..."></textarea>
+            </div>
+
+            <div>
+                <button type="submit" id="submitbtn">Concordo com todos os termos conforme a LGPD <br> (Lei nº 13.709/2018) e desejo enviar o formulário. </button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        
+        var behavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+        options = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(behavior.apply({}, arguments), options);
+            }
+        };
+
+    
+        $('#telefone').mask(behavior, options);
+        $('#cpf').mask('000.000.000-00', {reverse: true});
+        $('#cep').mask('00000-000');
+        $('#datadenascimento').mask('00/00/0000');
+    
+        
+    });
+</script>
+
+<script defer src="app.js"></script>
+
+</body>
+</html>
